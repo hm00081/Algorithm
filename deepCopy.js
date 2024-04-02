@@ -9,6 +9,18 @@ function deepCopy(object) {
     }
     return copy;
 }
+
+// 깊은복사
+const deepCopyTwo = (obj) =>
+    Object.keys(obj).reduce(
+        (acc, key) => {
+            const value = obj[key];
+            acc[key] = typeof value === 'object' && value !== null ? deepCopy(value) : value;
+            return acc;
+        },
+        Array.isArray(obj) ? [] : {}
+    );
+
 const copy = deepCopy(object);
 copy.number.one = 3;
 copy.arr[2].push(5);
